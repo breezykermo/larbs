@@ -49,7 +49,7 @@ G,https://github.com/lukesmithxyz/dmenu.git,"runs commands and provides a UI for
 G,https://github.com/lukesmithxyz/st.git,"is my custom build of suckless's terminal emulator."
 G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
 ,slock,"allows you to lock your computer, and quickly unlock with your password."
-# LK custom
+# ..and mine
 ,networkmanager,"to connect to the internet w/o losing sanity"
 ,wireless_tools,"to connect to wifi w/o losing sanity"
 ,fish,"is a better shell"
@@ -61,3 +61,4 @@ G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
 ,blender,"for all things 3d"
 A,keybase-bin,"encrypted messaging"
 A,slack-desktop,"obligatory messaging for work"
+A,dropbox,"for syncing and cloud storage"
