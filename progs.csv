@@ -52,6 +52,7 @@ G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
 # ..and mine
 ,networkmanager,"to connect to the internet w/o losing sanity"
 ,wireless_tools,"to connect to wifi w/o losing sanity"
+,python-pip,"is essential for python stuff"
 ,fish,"is a better shell"
 ,htop,"is how you work out what's going on in your computer"
 ,bat,"pretty prints files"
