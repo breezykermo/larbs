@@ -1,0 +1,8 @@
+.ssh
+.cache
+.config/BraveSoftware
+.config/Slack
+.config/nvim/plugged
+.config/fish/generated_completions
+.local/share/fish/generated_completions
+.config/pulse
