@@ -39,6 +39,10 @@ Use [LARBS](https://larbs.xyz) to autoinstall everything:
 
 ```
 curl -LO larbs.xyz/larbs.sh
+sh larbs.xyz \
+    -r https://github.com/breezykermo/larbs.git \
+    -p https://raw.githubusercontent.com/breezykermo/larbs/master/progs.csv
+
 ```
 
 or clone the repo files directly to your home directory and install the
