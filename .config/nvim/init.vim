@@ -26,6 +26,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
 " IDE
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree'
@@ -533,7 +534,7 @@ noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
 
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store', '\.pyc$', '__pycache__', '\.meta$']
+let NERDTreeIgnore=['\~$', '\.git$', '.DS_Store', '\.pyc$', '__pycache__', '\.meta$']
 
 " Close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
