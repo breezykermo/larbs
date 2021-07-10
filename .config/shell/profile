@@ -6,9 +6,8 @@
 # to clean up.
 
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
-
-unsetopt PROMPT_SP
+export PATH="$PATH/home/$USER/.local/bin"
+# unsetopt PROMPT_SP
 
 # Default programs:
 export EDITOR="nvim"
