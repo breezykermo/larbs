@@ -6,7 +6,7 @@
 # to clean up.
 
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH/home/$USER/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 # unsetopt PROMPT_SP
 
 # Default programs:
