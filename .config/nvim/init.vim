@@ -119,8 +119,10 @@ set shell=/bin/bash
 " aesthetics
 set guicursor+=n:hor20-Cursor/lCursor-blinkwait300-blinkon200-blinkoff150
 set background=dark
-" colorscheme gruvbox
+colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 " Enable autocompletion:
 	set wildmode=longest,list,full
