@@ -1,4 +1,5 @@
 let mapleader =","
+let g:mapleader = ","
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -8,41 +9,41 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-" AESTHETICS
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/goyo.vim'
-Plug 'ap/vim-css-color'
-Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
-" FUNCTION
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'godlygeek/tabular'
-Plug 'tpope/vim-endwise'
-Plug 'Yggdroot/indentLine'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'Raimondi/delimitMate'
-Plug 'moll/vim-bbye'
-Plug 'terryma/vim-multiple-cursors'
-" IDE
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sensible'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ap/vim-buftabline'
-Plug 'neoclide/coc.nvim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'sheerun/vim-polyglot'
-Plug 'dense-analysis/ale'
-Plug 'vimwiki/vimwiki'
-Plug 'mileszs/ack.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
-" LANGS
-Plug 'rust-lang/rust.vim'
-Plug 'hashivim/vim-terraform'
-
+	" AESTHETICS
+	Plug 'bling/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	Plug 'junegunn/goyo.vim'
+	Plug 'junegunn/limelight.vim'
+	Plug 'ap/vim-css-color'
+	Plug 'morhetz/gruvbox'
+	Plug 'altercation/vim-colors-solarized'
+	" FUNCTION
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-surround'
+	Plug 'godlygeek/tabular'
+	Plug 'tpope/vim-endwise'
+	Plug 'Yggdroot/indentLine'
+	Plug 'ntpeters/vim-better-whitespace'
+	Plug 'Raimondi/delimitMate'
+	Plug 'moll/vim-bbye'
+	Plug 'terryma/vim-multiple-cursors'
+	" IDE
+	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-sensible'
+	Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'preservim/nerdtree'
+	Plug 'Xuyuanp/nerdtree-git-plugin'
+	Plug 'ap/vim-buftabline'
+	Plug 'neoclide/coc.nvim'
+	Plug 'ludovicchabant/vim-gutentags'
+	Plug 'sheerun/vim-polyglot'
+	Plug 'dense-analysis/ale'
+	Plug 'vimwiki/vimwiki'
+	Plug 'mileszs/ack.vim'
+	Plug 'nvim-treesitter/nvim-treesitter'
+	" LANGS
+	Plug 'rust-lang/rust.vim'
+	Plug 'hashivim/vim-terraform'
 call plug#end()
 
 set title
@@ -133,18 +134,11 @@ match OverLength /\%121v.\+/
 " Perform dot commands over visual blocks:
 	vnoremap . :normal .<CR>
 " Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+	" map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
 " Spell-check set to <leader>o, 'o' for 'orthography':
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
-
-" vimling:
-	nm <leader><leader>d :call ToggleDeadKeys()<CR>
-	imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
-	nm <leader><leader>i :call ToggleIPA()<CR>
-	imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
-	nm <leader><leader>q :call ToggleProse()<CR>
 
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
@@ -152,14 +146,12 @@ match OverLength /\%121v.\+/
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 
-
 " Remove search highlight
 	nnoremap <leader><space> :nohlsearch<CR>
 
 " Buffer prev/next
 	nnoremap <C-x> :bnext<CR>
 	nnoremap <C-z> :bprev<CR>
-
 
 " Fast saving
 	nmap <leader>w :w!<cr>
@@ -175,7 +167,6 @@ match OverLength /\%121v.\+/
 
 " Just go out in insert mode
 	imap jk <ESC>l
-
 
 " Proxy tcomment's 'gcc' command to toggle comment on a line
 	nnoremap <leader>c :TComment<CR>
@@ -352,12 +343,6 @@ if has("autocmd")
   augroup END
 else
 endif " has("autocmd")
-
-" This comes first, because we have mappings that depend on leader
-" With a map leader it's possible to do extra key combinations
-" i.e: <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
