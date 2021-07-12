@@ -51,6 +51,7 @@ G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
 ,slock,"allows you to lock your computer, and quickly unlock with your password."
 # ..and mine
 ,git,"to do anything meaningful"
+,diff-so-fancy,"does better diffing in git"
 ,ansible,"for configuration management"
 ,make,"to make things"
 ,networkmanager,"to connect to the internet w/o losing sanity"
