@@ -411,7 +411,17 @@ augroup END
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 " Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=2 sw=4 sts=2 expandtab | match OverLength /\%9999v.\+/
+	autocmd BufNewFile,BufReadPost *.md setl ts=2 sw=4 sts=2 expandtab | match OverLength /\%9999v.\+/
+	set conceallevel=2
+	nnoremap <leader>e :call MdConcealToggle()<cr>
+	function! MdConcealToggle()
+			if &conceallevel
+					setlocal conceallevel=0
+			else
+					setlocal conceallevel=2
+			endif
+	endfunction
+
 
 " Dockerfile settings
 autocmd FileType dockerfile set noexpandtab
