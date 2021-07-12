@@ -192,7 +192,7 @@ match OverLength /\%121v.\+/
 	map Q gq
 
 " Check file in shellcheck:
-	map <leader>s :!clear && shellcheck -x %<CR>
+	" map <leader>s :!clear && shellcheck -x %<CR>
 
 " Open my bibliography file in split
 	map <leader>b :vsp<space>$BIB<CR>
@@ -211,13 +211,6 @@ match OverLength /\%121v.\+/
 	autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want:
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	map <leader>v :VimwikiIndex
-	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
-
 " Save file as sudo on files that require root permission
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
@@ -232,9 +225,10 @@ match OverLength /\%121v.\+/
 	autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
 	autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
 " Recompile dwmblocks on config edit.
-	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
+	" autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
 
-" Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
+" Turns off highlighting on the bits of code that are changed, so the line that is changed is
+" highlighted but the actual text that has changed stands out on the line and is readable.
 if &diff
     highlight! link DiffText MatchParen
 endif
@@ -459,203 +453,195 @@ set wildignore+=*.orig                           " Merge resolution files
 " ----------------------------------------- "
 " Plugin configs 			    			"
 " ----------------------------------------- "
-
 " ==================== CtrlP ====================
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10		" maxiumum height of match window
-let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
-let g:ctrlp_mruf_max=450 		" number of recently opened files
-let g:ctrlp_max_files=0  		" do not limit the number of searchable files
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 1
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+	let g:ctrlp_cmd = 'CtrlP'
+	let g:ctrlp_working_path_mode = 'ra'
+	let g:ctrlp_max_height = 10		" maxiumum height of match window
+	let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
+	let g:ctrlp_mruf_max=450 		" number of recently opened files
+	let g:ctrlp_max_files=0  		" do not limit the number of searchable files
+	let g:ctrlp_use_caching = 1
+	let g:ctrlp_clear_cache_on_exit = 1
+	let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
-" ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+	" ignore files in .gitignore
+	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-func! MyCtrlPTag()
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-        \ 'AcceptSelection("t")': ['<c-t>'],
-        \ }
-  CtrlPBufTag
-endfunc
-command! MyCtrlPTag call MyCtrlPTag()
+	func! MyCtrlPTag()
+		let g:ctrlp_prompt_mappings = {
+					\ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+					\ 'AcceptSelection("t")': ['<c-t>'],
+					\ }
+		CtrlPBufTag
+	endfunc
+	command! MyCtrlPTag call MyCtrlPTag()
 
-nmap <C-g> :MyCtrlPTag<cr>
-imap <C-g> <esc>:MyCtrlPTag<cr>
+	nmap <C-g> :MyCtrlPTag<cr>
+	imap <C-g> <esc>:MyCtrlPTag<cr>
 
-nmap <C-b> :CtrlPCurWD<cr>
-imap <C-b> <esc>:CtrlPCurWD<cr>
-nnoremap <leader>. :CtrlPTag<cr>
+	nmap <C-b> :CtrlPCurWD<cr>
+	imap <C-b> <esc>:CtrlPCurWD<cr>
+	nnoremap <leader>. :CtrlPTag<cr>
 
 " ==================== Fugitive ====================
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gp :Gpush<CR>
-vnoremap <leader>gb :Gblame<CR>
-
-let g:gitgutter_git_executable="/usr/local/bin/git"
-
-" ==================== Vim-go ====================
-let g:go_fmt_fail_silently = 0
-let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
-let g:go_term_enabled = 1
-let g:go_snippet_engine = "neosnippet"
+	nnoremap <leader>ga :Git add %:p<CR><CR>
+	nnoremap <leader>gs :Gstatus<CR>
+	nnoremap <leader>gp :Gpush<CR>
+	vnoremap <leader>gb :Gblame<CR>
+	" let g:gitgutter_git_executable="/usr/local/bin/git"
 
 " ==================== delimitMate ====================
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_smart_quotes = 1
-let g:delimitMate_expand_inside_quotes = 0
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
+	let g:delimitMate_expand_cr = 1
+	let g:delimitMate_expand_space = 1
+	let g:delimitMate_smart_quotes = 1
+	let g:delimitMate_expand_inside_quotes = 0
+	let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 "==================== NerdTree ====================
-" Nerd tree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-if has('nvim')
-	let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
-else
-        let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
-endif
+	" Nerd tree
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+	if has('nvim')
+		let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
+	else
+					let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
+	endif
 
-" For toggling
-nmap	<C-n> :NERDTreeToggle<CR>
-noremap <Leader>n :NERDTreeToggle<cr>
-noremap <Leader>f :NERDTreeFind<cr>
+	" For toggling
+	nmap	<C-n> :NERDTreeToggle<CR>
+	noremap <Leader>n :NERDTreeToggle<cr>
+	noremap <Leader>f :NERDTreeFind<cr>
 
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\~$', '\.git$', '.DS_Store', '\.pyc$', '__pycache__', '\.meta$']
+	let NERDTreeShowHidden=1
+	let NERDTreeIgnore=['\~$', '\.git$', '.DS_Store', '\.pyc$', '__pycache__', '\.meta$']
 
-" Close nerdtree and vim on close file
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+	" Close nerdtree and vim on close file
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " ==================== vim-json ====================
-let g:vim_json_syntax_conceal = 0
+	let g:vim_json_syntax_conceal = 0
 
 " ==================== vim-multiple-cursors ====================
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-i>'
-let g:multi_cursor_prev_key='<C-y>'
-let g:multi_cursor_skip_key='<C-b>'
-let g:multi_cursor_quit_key='<Esc>'
+	let g:multi_cursor_use_default_mapping=0
+	let g:multi_cursor_next_key='<C-i>'
+	let g:multi_cursor_prev_key='<C-y>'
+	let g:multi_cursor_skip_key='<C-b>'
+	let g:multi_cursor_quit_key='<Esc>'
 
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
+	" Called once right before you start selecting multiple cursors
+	function! Multiple_cursors_before()
+		if exists(':NeoCompleteLock')==2
+			exe 'NeoCompleteLock'
+		endif
+	endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
+	" Called once only when the multiple selection is canceled (default <Esc>)
+	function! Multiple_cursors_after()
+		if exists(':NeoCompleteUnlock')==2
+			exe 'NeoCompleteUnlock'
+		endif
+	endfunction
 
 " ========= vim-better-whitespace ==================
-" auto strip whitespace except for file with extention blacklisted
-let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
+	" auto strip whitespace except for file with extention blacklisted
+	let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+	autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
 
 " =================== vim-airline ========================
-let g:airline_theme='gruvbox'
+	let g:airline_theme='gruvbox'
 
-" set to use powerline fonts when not in a ssh session
-let g:remoteSession = ($STY == "")
-if !g:remoteSession
-  let g:airline_powerline_fonts=1
-endif
+	" set to use powerline fonts when not in a ssh session
+	let g:remoteSession = ($STY == "")
+	if !g:remoteSession
+		let g:airline_powerline_fonts=1
+	endif
+
 " =================== java ========================
-" see https://www.chrisatmachine.com/Neovim/24-neovim-and-java/
-" nmap jl <Plug>(coc-codelens-action)
+	" see https://www.chrisatmachine.com/Neovim/24-neovim-and-java/
+	" nmap jl <Plug>(coc-codelens-action)
 
 " =================== rust.vim ========================
-" Enable automatic running of :RustFmt when a buffer is saved.
-let g:rustfmt_autosave = 1
+	" Enable automatic running of :RustFmt when a buffer is saved.
+	let g:rustfmt_autosave = 1
 
-" The :RustPlay command will send the current selection, or if nothing is
-" selected the current buffer, to the Rust playpen. Then copy the url to the
-" clipboard.
-let g:rust_clip_command = 'xclip -selection clipboard'
-" More here: https://github.com/fannheyward/coc-rust-analyzer
-nmap <leader>d :CocCommand rust-analyzer.openDocs<cr>
+	" The :RustPlay command will send the current selection, or if nothing is
+	" selected the current buffer, to the Rust playpen. Then copy the url to the
+	" clipboard.
+	let g:rust_clip_command = 'xclip -selection clipboard'
+	" More here: https://github.com/fannheyward/coc-rust-analyzer
+	nmap <leader>d :CocCommand rust-analyzer.openDocs<cr>
 
 " =================== writing ========================
-" let g:limelight_conceal_ctermfg = '235'
-let g:limelight_conceal_ctermfg = '245'
-let g:limelight_conceal_guifg = '#282828'
-let g:limelight_default_coefficient = 0.5
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+	let g:limelight_conceal_ctermfg = '245'
+	let g:limelight_conceal_guifg = '#282828'
+	let g:limelight_default_coefficient = 0.5
+	autocmd! User GoyoEnter Limelight
+	autocmd! User GoyoLeave Limelight!
 
 " =================== gutentags ========================
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json', '.git']
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_ctags_extra_args = [
-      \ '--tag-relative=yes',
-      \ '--fields=+ailmnS',
-      \ ]
-let g:gutentags_ctags_exclude = [
-    \ '*.git', '*.svg', '*.hg',
-    \ '*/tests/*',
-    \ 'build',
-    \ 'dist',
-    \ '*sites/*/files/*',
-    \ 'bin',
-    \ 'node_modules',
-    \ 'bower_components',
-    \ 'cache',
-    \ 'compiled',
-    \ 'docs',
-    \ 'example',
-    \ 'bundle',
-    \ 'vendor',
-    \ '*.md',
-    \ '*-lock.json',
-    \ '*.lock',
-    \ '*bundle*.js',
-    \ '*build*.js',
-    \ '.*rc*',
-    \ '*.json',
-    \ '*.min.*',
-    \ '*.map',
-    \ '*.bak',
-    \ '*.zip',
-    \ '*.pyc',
-    \ '*.class',
-    \ '*.sln',
-    \ '*.Master',
-    \ '*.csproj',
-    \ '*.tmp',
-    \ '*.csproj.user',
-    \ '*.cache',
-    \ '*.pdb',
-    \ 'tags*',
-    \ 'cscope.*',
-    \ '*.css',
-    \ '*.less',
-    \ '*.scss',
-    \ '*.exe', '*.dll',
-    \ '*.mp3', '*.ogg', '*.flac',
-    \ '*.swp', '*.swo',
-    \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-    \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-    \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
-    \ ]
+	let g:gutentags_add_default_project_roots = 0
+	let g:gutentags_project_root = ['package.json', '.git']
+	let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+	let g:gutentags_generate_on_new = 1
+	let g:gutentags_generate_on_missing = 1
+	let g:gutentags_generate_on_write = 1
+	let g:gutentags_generate_on_empty_buffer = 0
+	let g:gutentags_ctags_extra_args = [
+				\ '--tag-relative=yes',
+				\ '--fields=+ailmnS',
+				\ ]
+	let g:gutentags_ctags_exclude = [
+			\ '*.git', '*.svg', '*.hg',
+			\ '*/tests/*',
+			\ 'build',
+			\ 'dist',
+			\ '*sites/*/files/*',
+			\ 'bin',
+			\ 'node_modules',
+			\ 'bower_components',
+			\ 'cache',
+			\ 'compiled',
+			\ 'docs',
+			\ 'example',
+			\ 'bundle',
+			\ 'vendor',
+			\ '*.md',
+			\ '*-lock.json',
+			\ '*.lock',
+			\ '*bundle*.js',
+			\ '*build*.js',
+			\ '.*rc*',
+			\ '*.json',
+			\ '*.min.*',
+			\ '*.map',
+			\ '*.bak',
+			\ '*.zip',
+			\ '*.pyc',
+			\ '*.class',
+			\ '*.sln',
+			\ '*.Master',
+			\ '*.csproj',
+			\ '*.tmp',
+			\ '*.csproj.user',
+			\ '*.cache',
+			\ '*.pdb',
+			\ 'tags*',
+			\ 'cscope.*',
+			\ '*.css',
+			\ '*.less',
+			\ '*.scss',
+			\ '*.exe', '*.dll',
+			\ '*.mp3', '*.ogg', '*.flac',
+			\ '*.swp', '*.swo',
+			\ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+			\ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+			\ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+			\ ]
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+" =================== ack ========================
+	let g:ackprg = 'ag --nogroup --nocolor --column'
+	cnoreabbrev Ack Ack!
+	nnoremap <Leader>a :Ack!<Space>
 
 " =================== vimwiki ========================
-let g:vimwiki_list = [{'path': '~/Dropbox (Brown)/obsidian/', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_folding = 'expr'
+	let g:vimwiki_list = [{'path': '~/Dropbox (Brown)/obsidian/', 'syntax': 'markdown', 'ext': '.md'}]
+	let g:vimwiki_folding = 'expr'
