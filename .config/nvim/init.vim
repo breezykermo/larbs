@@ -38,8 +38,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
 Plug 'vimwiki/vimwiki'
 Plug 'mileszs/ack.vim'
+Plug 'nvim-treesitter/nvim-treesitter'
 " LANGS
 Plug 'rust-lang/rust.vim'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -65,7 +67,7 @@ set encoding=utf-8
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=79
+set colorcolumn=119
 set number relativenumber
 set noerrorbells                " No beeps
 set number                      " Show line numbers
@@ -122,7 +124,7 @@ set background=dark
 colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%121v.\+/
 
 " Enable autocompletion:
 	set wildmode=longest,list,full
@@ -430,7 +432,7 @@ augroup END
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 " Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=2 sw=4 sts=2 expandtab
+autocmd BufNewFile,BufReadPost *.md setl ts=2 sw=4 sts=2 expandtab | match OverLength /\%9999v.\+/
 
 " Dockerfile settings
 autocmd FileType dockerfile set noexpandtab
@@ -441,6 +443,10 @@ autocmd FileType itconfig,sh,toml set noexpandtab
 
 " python indent
 autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 colorcolumn=80 smarttab expandtab
+
+" java
+au BufNewFile,BufRead *.java setlocal textwidth=120 colorcolumn=120
+
 
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
@@ -578,6 +584,9 @@ let g:remoteSession = ($STY == "")
 if !g:remoteSession
   let g:airline_powerline_fonts=1
 endif
+" =================== java ========================
+" see https://www.chrisatmachine.com/Neovim/24-neovim-and-java/
+" nmap jl <Plug>(coc-codelens-action)
 
 " =================== rust.vim ========================
 " Enable automatic running of :RustFmt when a buffer is saved.
@@ -590,7 +599,7 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 " More here: https://github.com/fannheyward/coc-rust-analyzer
 nmap <leader>d :CocCommand rust-analyzer.openDocs<cr>
 
-" Writing mode
+" =================== writing ========================
 " let g:limelight_conceal_ctermfg = '235'
 let g:limelight_conceal_ctermfg = '245'
 let g:limelight_conceal_guifg = '#282828'
@@ -598,8 +607,7 @@ let g:limelight_default_coefficient = 0.5
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-map <Leader>l "dyiw:call MacDict(@d)<cr>
-
+" =================== gutentags ========================
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', '.git']
 let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
@@ -663,5 +671,6 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
+" =================== vimwiki ========================
 let g:vimwiki_list = [{'path': '~/Dropbox (Brown)/obsidian/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_folding = 'expr'
