@@ -1,6 +1,5 @@
 {
-  "codeLens.enable": true,
   "java.home": "~/.asdf/installs/java/openjdk-11.0.2",
-  "java.referencesCodeLens.enabled": true,
-  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar"
+  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
+  "java.import.gradle.enabled": true
 }
