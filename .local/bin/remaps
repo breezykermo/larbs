@@ -8,7 +8,8 @@ xset r rate 240 40
 # But when it is pressed only once, treat it as escape.
 # killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
 # Map the menu button to right super as well.
-setxkbmap -option ctrl:nocaps
+# setxkbmap -option ctrl:nocaps
+setxkbmap -option "terminate:ctrl_alt_bksp,lv3:rwin_switch,grp:shifts_toggle,caps:ctrl_modifier,altwin:swap_lalt_lwin"
 # xmodmap -e 'keycode 135 = Super_R'
 # Turn off the caps lock if on since there is no longer a key for it.
 # xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
