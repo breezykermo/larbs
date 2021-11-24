@@ -3,7 +3,7 @@ A riff on [Luke Smith](https://lukesmith.xyz)'s dotfiles.
 
 ## Usage
 
-Use [LARBS](https://larbs.xyz) to autoinstall everything:
+Use [LARBS](https://larbs.xyz) to autoinstall everything on a fresh Arch or [Artix](https://artixlinux.org/) box:
 
 ```
 curl -LO larbs.xyz/larbs.sh
