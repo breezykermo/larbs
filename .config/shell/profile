@@ -7,6 +7,7 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin/statusbar:$PATH"
 # unsetopt PROMPT_SP
 
 # Default programs:
@@ -153,3 +154,9 @@ fi
 
 # Switch escape and caps if tty and no passwd required:
 sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null
+
+# HALTER
+# export PATH="$PATH:$HOME/.bin"
+# source ~/.halter_core
+# source ~/.halter_backend
+alias littlewebcam='ffplay -fflags nobuffer -flags low_delay -framedrop /dev/video0'
